@@ -1,4 +1,4 @@
-# 02267 Software Development of Web Services: DTU Pay project
+# DTU Pay project with Microservice Architecture - Developed by 4 people during a 3 weeks course
 
 The project consists of 7 projects, where the `messaging-utilities-3.4` was provided by Hubert Baumeister. The remaining projects have been developed throughout the course with comments indicating the responsible people.
 
