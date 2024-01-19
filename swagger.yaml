@@ -1,0 +1,238 @@
+swagger: '2.0'
+info:
+  version: v1.0
+  title: DTU Pay
+host: 'fm-18.compute.dtu.dk:8080'
+basePath: /
+schemes:
+  - http
+paths:
+  /customer:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterUserData'
+      responses:
+        '200':
+          description: OK
+          headers: { }
+          schema:
+            $ref: '#/definitions/RegisterUserData'
+        '400':
+          description: Bad Request
+          headers: { }
+          schema:
+            type: string
+    delete:
+      consumes:
+        - text/plain
+      produces:
+        - text/plain
+      parameters:
+        - type: string
+          name: id
+          in: query
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers: { }
+          schema:
+            type: string
+        '404':
+          description: Not Found
+          headers: { }
+          schema:
+            type: string
+  /customer/tokens:
+    get:
+      consumes: [ ]
+      produces:
+        - application/json
+      parameters:
+        - type: string
+          name: id
+          in: query
+          required: true
+        - type: number
+          name: amount
+          in: query
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers: { }
+          schema:
+            $ref: '#/definitions/Tokens'
+  /customer/report:
+    get:
+      consumes: [ ]
+      produces:
+        - application/json
+      parameters:
+        - type: string
+          name: id
+          in: query
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers: { }
+          schema:
+            $ref: '#/definitions/CustomerReport'
+        '204':
+          description: No Content
+          headers: { }
+  /merchant:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterUserData'
+      responses:
+        '200':
+          description: OK
+          headers: { }
+          schema:
+            $ref: '#/definitions/RegisterUserData'
+        '400':
+          description: Bad Request
+          headers: { }
+          schema:
+            type: string
+    delete:
+      consumes:
+        - text/plain
+      produces:
+        - text/plain
+      parameters:
+        - type: string
+          name: id
+          in: query
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers: { }
+          schema:
+            type: string
+        '404':
+          description: Not Found
+          headers: { }
+          schema:
+            type: string
+  /merchant/report:
+    get:
+      consumes: [ ]
+      produces:
+        - application/json
+      parameters:
+        - type: string
+          name: id
+          in: query
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers: { }
+          schema:
+            $ref: '#/definitions/MerchantReport'
+        '204':
+          description: No Content
+          headers: { }
+  /report:
+    get:
+      consumes: [ ]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          headers: { }
+          schema:
+            $ref: '#/definitions/ManagerReport'
+        '204':
+          description: No Content
+          headers: { }
+definitions:
+  RegisterUserData:
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      cpr:
+        type: string
+      bankAccount:
+        type: string
+  Tokens:
+    properties:
+      tokens:
+        type: array
+        items:
+          type: object
+          properties:
+            consumed:
+              type: boolean
+            tokenId:
+              type: string
+            userId:
+              type: string
+  ManagerReport:
+    properties:
+      id:
+        type: string
+      managerPayments:
+        type: array
+        items:
+          type: object
+          properties:
+            amount:
+              type: number
+            customerId:
+              type: string
+            merchantId:
+              type: string
+            token:
+              type: string
+  MerchantReport:
+    properties:
+      id:
+        type: string
+      merchantPayments:
+        type: array
+        items:
+          type: object
+          properties:
+            amount:
+              type: number
+            token:
+              type: string
+  CustomerReport:
+    properties:
+      id:
+        type: string
+      customerPayments:
+        type: array
+        items:
+          type: object
+          properties:
+            amount:
+              type: number
+            merchantId:
+              type: string
+            token:
+              type: string

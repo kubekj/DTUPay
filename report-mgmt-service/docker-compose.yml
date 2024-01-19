@@ -1,0 +1,6 @@
+version: '3'
+services:
+  report-mgmt-service:
+    image: report-mgmt
+    build: .
+ 

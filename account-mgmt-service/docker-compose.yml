@@ -1,0 +1,6 @@
+version: '3'
+services:
+  account-mgmt-service:
+    image: account-mgmt
+    build: .
+ 
