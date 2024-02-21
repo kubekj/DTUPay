@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: v1.0
   title: DTU Pay
-host: 'fm-18.compute.dtu.dk:8080'
+host: 'example-host:8080'
 basePath: /
 schemes:
   - http
